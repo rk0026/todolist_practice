@@ -1,0 +1,23 @@
+.todoItem {
+    border-bottom: 1px solid #efefef;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+.removeTodo {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    outline: none;
+    box-shadow: none;
+    border-width: 2px;
+    border-radius: 3px;
+    border-style: solid;
+    padding: 8px;
+    color: rgba(235, 243, 238, 0.904);
+    border-color: rgba(208, 43, 230, 0.904);
+    background-color: rgba(177, 81, 241, 0.788);
+  }
+
+  label {
+    text-align: left;
+  }
