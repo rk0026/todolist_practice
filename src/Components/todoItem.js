@@ -1,80 +1,83 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './todoItem.css';
+import PropTypes from 'prop-types';
 
 class TodoItem extends Component {
+  static propTypes = {
+    todo: PropTypes.object,
+    addTodo: PropTypes.func,
+    removeTodo: PropTypes.func,
+    handleToggle: PropTypes.func,
+    id: PropTypes.number,
+    save: PropTypes.func,
+    cancel: PropTypes.func,
+  }
 
-    constructor(props) {
-        super(props);
-        this.state= {
-            editing: this.props.todo.text,
-        }
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      editing: this.props.todo.text,
+      isEdited: false,
+    };
+  }
 
-    addTodo = (todo) => {
-        this.props.addTodo(todo)
-    }
-    
-    removeTodo = (id) =>{
-        this.props.removeTodo(id)
-    }
+  addTodo = (todo) => {
+    this.props.addTodo(todo);
+  }
 
-    changeStyle = () => {
-        let targ = this.label;
-        let item = this.input;
-        if(targ.style.display === "none"){
-            targ.style.display = "";
-            item.style.display = "none"
-        }else{
-            targ.style.display="none";
-            item.style.display="";
-        };
-    }
+  removeTodo = (id) => {
+    this.props.removeTodo(id);
+  }
 
-    handleChange = (e) => {
-        this.setState({ editing: e.target.value });
-    }
-    
-    handleToggle = (id) => {
-        this.props.handleToggle(id)
-    }
-    
-    render() {
-        return (
-            <div className="todoItem">
-                <input
-                    className="toggle"
-                    type="checkbox"
-                    checked={this.props.todo.completed}
-                    onClick={() => this.handleToggle(this.props.id)}
-                />
-                <label 
-                    ref = {r => {this.label = r}}
-                    onDoubleClick={() => {
-                        this.changeStyle()
-                    } }
-                >
-                    {this.props.todo.text}
-                </label>
-                <input
-                    ref={r => {this.input = r}}
-                    style={{display: 'none'}}
-                    value={this.state.editing} 
-                    onChange={this.handleChange}
-                    onKeyDown={(e) => {
-                        if(e.keyCode === 13 ) {
-                            this.props.save(this.state.editing, this.props.id);
-                            this.changeStyle()
-                        } else if (e.keyCode === 27) {
-                            this.props.cancel();
-                            this.changeStyle()
-                        };
-                    }}  
-                />
-                <button className="removeTodo" onClick={() => this.removeTodo(this.props.id)}>remove</button>
+  changeStyle = () => {
+    const isedited = !this.state.isEdited;
+    console.log(isedited);
+    this.setState({ isEdited: isedited });
+  }
 
-            </div>
-        )
-    }
+  handleChange = (e) => {
+    this.setState({ editing: e.target.value });
+  }
+
+
+  render() {
+    return (
+      <div className="todoItem">
+        <input
+          type="checkbox"
+          checked={this.props.todo.completed}
+          onClick={this.props.handleToggle.bind(null, this.props.id)}
+        />
+        <label
+          // ref = {(r) => { this.label = r; }}
+          style={{ display: this.state.isEdited ? 'none' : 'block' }}
+          onDoubleClick={() => {
+            this.changeStyle();
+          }}
+        >
+          {this.props.todo.text}
+        </label>
+        <input
+          // ref={(r) => { this.input = r; }}
+          style={{ display: this.state.isEdited ? 'block' : 'none' }}
+          // className={this.state.editing ? 'show' : 'hidden'}
+          value={this.state.editing}
+          onChange={this.handleChange}
+          onKeyDown={(event) => {
+            if (event.keyCode === 13) {
+              this.props.save(this.state.editing, this.props.id);
+              this.changeStyle();
+            } else if (event.keyCode === 27) {
+              this.props.cancel();
+              this.changeStyle();
+            }
+          }}
+          onBlur={() => { this.props.cancel(); this.changeStyle(); }}
+        />
+        <button className="removeTodo" onClick={() => this.removeTodo(this.props.id)}>remove</button>
+      </div>
+    );
+  }
 }
 
 export default TodoItem;
