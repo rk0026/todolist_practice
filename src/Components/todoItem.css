@@ -16,8 +16,62 @@
     color: rgba(235, 243, 238, 0.904);
     border-color: rgba(208, 43, 230, 0.904);
     background-color: rgba(177, 81, 241, 0.788);
+    cursor: pointer;
   }
 
-  label {
-    text-align: left;
+label {
+  text-align: left;
+}
+
+input[type="checkbox"]{
+width: 20px;
+height: 20px; 
+cursor: pointer;
+  /* -webkit-appearance: none; */
+/* appearance: none;  */
+}
+
+/* 
+  input[type=checkbox] {
+	  position: absolute; 
+    overflow: hidden; 
+    clip: rect(0 0 0 0); 
+    height:1px; 
+    width:1px; 
+    margin:-1px; 
+    padding:0;
+    border:0; */
+/* }
+
+input[type=checkbox].css-checkbox + label.css-label {
+	padding-left:20px;
+	height:15px; 
+	display:inline-block;
+	line-height:15px;
+	background-repeat:no-repeat;
+	background-position: 0 0;
+	font-size:15px;
+	vertical-align:middle;
+	cursor:pointer;
+}
+
+label {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   }
+  
+input[type=checkbox].css-checkbox:checked + label.css-label {
+	background-position: 0 -15px;
+}
+
+.css-label{
+	background-image:url(http://csscheckbox.com/checkboxes/dark-check-green.png);
+} */
+
+
+
+/* .lite-blue-check{background-image:url(http://csscheckbox.com/checkboxes/lite-blue-check.png);} */
